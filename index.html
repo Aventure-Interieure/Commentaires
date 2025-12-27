@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laissez un commentaire sur mon livre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    form {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      max-width: 700px;
+      width: 90%;
+      margin: 3rem 0;
+    }
+    h1 { text-align: center; font-size: 1.8rem; color: #2C3345; }
+    label { font-weight: 600; margin-top: 1rem; display: block; color: #2C3345; }
+    input, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    textarea { resize: vertical; }
+    button {
+      background-color: #1e40af;
+      color: white;
+      padding: 0.9rem 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 1.5rem;
+      transition: background-color 0.3s;
+    }
+    button:hover { background-color: #1d4ed8; }
+    .img-wrapper { text-align: center; margin: 1rem 0; }
+    .img-wrapper img { width: 120%; max-width: 400px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <form id="CommandForm" action="https://script.google.com/macros/s/AKfycbw_q505bU0OnIBZymrAK0sSPNqiIJv7ozE6o37K3SzZBqaeX5Ok2OJ1H_BUfKViPuxb/exec" method="POST">
+    <h1>Laissez un commentaire sur mon livre</h1>
+
+    <div class="img-wrapper">
+      <img src="https://raw.githubusercontent.com/DELHEZISA/Mon-livre/main/4ème.jpg" alt="Couverture du livre">
+    </div>
+
+    <label for="nom">Votre nom</label>
+    <input type="text" id="nom" name="Nom">
+
+    <label for="prenom">Votre prénom</label>
+    <input type="text" id="prenom" name="Prénom">
+
+    <label for="email">Votre adresse e-mail</label>
+    <input type="email" id="email" name="Email">
+
+    <label for="comment">Indiquez ici vos commentaires</label>
+    <textarea id="comment" name="commentaires" rows="15"></textarea>
+
+    <!-- Champs cachés pour GAS -->
+    <input type="hidden" name="feuille" value="Commentaires">
+    <input type="hidden" name="debug" value="true">
+
+    <button type="submit" id="submitButton">Envoyer</button>
+  </form>
+
+  <!-- Script fetch pour soumission et redirection -->
+  <script>
+    const form = document.getElementById('CommandForm');
+    const submitButton = document.getElementById('submitButton');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitButton.disabled = true;
+      submitButton.innerText = "Envoi en cours...";
+
+      const data = new FormData(form);
+
+      fetch(form.action, { method: 'POST', body: data })
+        .then(res => res.text())
+        .then(text => {
+          if (text.includes('success')) {
+            window.location.href = 'https://delhezisa.github.io/Commentaires-du-livre/merci.html';
+          } else {
+            alert('Une erreur est survenue. Réessayez plus tard.');
+            submitButton.disabled = false;
+            submitButton.innerText = "Envoyer";
+          }
+        })
+        .catch(err => {
+          alert('Erreur réseau : ' + err.message);
+          submitButton.disabled = false;
+          submitButton.innerText = "Envoyer";
+        });
+    });
+  </script>
+
+</body>
+</html>
