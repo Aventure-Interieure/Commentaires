@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laissez un commentaire sur mon livre</title>
+  <title>Laissez un commentaire sur L'aventure Intérieure</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -58,21 +58,22 @@
 </head>
 <body>
 
-  <form id="CommandForm" action="https://script.google.com/macros/s/AKfycbw_q505bU0OnIBZymrAK0sSPNqiIJv7ozE6o37K3SzZBqaeX5Ok2OJ1H_BUfKViPuxb/exec" method="POST">
-    <h1>Laissez un commentaire sur mon livre</h1>
+  <form id="CommandForm" action="https://script.google.com/macros/s/AKfycbxRG7oNLUtdGU2HPbwkAyOyijzwyd5-MRrX34HvQ_HdDAEDQkU6tY-6W-iN-uSBmus9/exec" method="POST">
+    <h1>Laissez un commentaire sur l'expérience que vous avez vécue</h1>
 
     <div class="img-wrapper">
-      <img src="https://raw.githubusercontent.com/DELHEZISA/Mon-livre/main/4ème.jpg" alt="Couverture du livre">
+      <img src="assets/Logo.png" alt="Qu'en avez-vous pensé ?">
     </div>
+	
+    <h3>Il me serait précieux de connaître vos ressentis lors de l'aventure que vous avez vécue.
+	    Cela me permet d'améliorer constamment les expériences que je vous propose.<br><br>
+		Si vous ne souhaitez pas que votre commentaire apparaisse sur mon site, merci de le préciser.<br></h3>
 
     <label for="nom">Votre nom</label>
     <input type="text" id="nom" name="Nom">
 
     <label for="prenom">Votre prénom</label>
     <input type="text" id="prenom" name="Prénom">
-
-    <label for="email">Votre adresse e-mail</label>
-    <input type="email" id="email" name="Email">
 
     <label for="comment">Indiquez ici vos commentaires</label>
     <textarea id="comment" name="commentaires" rows="15"></textarea>
@@ -100,7 +101,7 @@
         .then(res => res.text())
         .then(text => {
           if (text.includes('success')) {
-            window.location.href = 'https://delhezisa.github.io/Commentaires-du-livre/merci.html';
+            window.location.href = 'https://aventure-interieure.github.io/Commentaires/merci.html';
           } else {
             alert('Une erreur est survenue. Réessayez plus tard.');
             submitButton.disabled = false;
